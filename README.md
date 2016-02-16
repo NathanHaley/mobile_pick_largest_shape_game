@@ -19,7 +19,7 @@ Tested with Xcode 7.2.1, iOS 9.2, and running on iPhone 6s, portrait
 ##Inspiration borrowed from tutorials at:
 
 ###Ray Wenderlich's site: Intermediate Design Patterns In Swift
-http://www.raywenderlich.com/86053/intermediate-design-patterns-in-swift
+https://www.raywenderlich.com/86053/intermediate-design-patterns-in-swift
 
 ###Vea Software at YouTube: UIPageViewController in Swift - Xcode 6.2 iOS 8.2 Tutorial 
 https://www.youtube.com/watch?v=8bltsDG2ENQ
