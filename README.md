@@ -27,14 +27,14 @@ https://www.youtube.com/watch?v=8bltsDG2ENQ
 
 ##Screenshots:
 
-Circles Game:
-<img src=“Circles.png" alt="Main Screen" style="width: 200px;" width=200 />
+Circles Game:<br>
+<img src="Circles.png" alt="Circle Game Screen" style="width: 200px;" width=200 />
 
-Squares Game:
-<img src=“Squares.png” alt="Main Screen" style="width: 200px;" width=200 />
+Squares Game:<br>
+<img src="Squares.png" alt="Squares Game  Screen" style="width: 200px;" width=200 />
 
-Circles And Squares Game:
-<img src=“CirclesAndSquares.png" alt="Main Screen" style="width: 200px;" width=200 />
+Circles And Squares Game:<br>
+<img src="CirclesAndSquares.png" alt="Circle And Squares Game  Screen" style="width: 200px;" width=200 />
 
-Messages For Streaks:
-<img src=“StreakMessages.png” alt="Main Screen" style="width: 200px;" width=200 />
+Messages For Streaks:<br>
+<img src="StreakMessages.png" alt="Streak Message Demo Screen" style="width: 200px;" width=200 />
