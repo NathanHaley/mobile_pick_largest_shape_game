@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GameMaxAreaPicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWA-sp-PIl">
+                                <rect key="frame" x="275" y="562" width="50" height="30"/>
+                                <state key="normal" title="Restart"/>
+                                <connections>
+                                    <action selector="restartAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AC1-em-BUD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xWA-sp-PIl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="irP-jo-9g9"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xWA-sp-PIl" secondAttribute="bottom" constant="8" symbolic="YES" id="zEm-l9-mgY"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-212" y="353"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="Odw-9M-v6i">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="9Id-rS-bMK" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sXw-WT-iB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="417" y="353"/>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="nI2-8K-Vpu">
+            <objects>
+                <viewController storyboardIdentifier="GameViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5qk-q2-5gf" customClass="GameViewController" customModule="GameMaxAreaPicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yJP-0W-HDE"/>
+                        <viewControllerLayoutGuide type="bottom" id="9mc-te-ZrV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mHX-V0-4cL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" restorationIdentifier="Game1" translatesAutoresizingMaskIntoConstraints="NO" id="sYP-Qe-uba" customClass="GameView" customModule="GameMaxAreaPicker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="121" width="600" height="435"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Va1-o9-3DH">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <barButtonItem title="Item" id="5PE-84-kvQ"/>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37j-5f-HUI">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="121"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9m-EL-chs">
+                                        <rect key="frame" x="0.0" y="27" width="600" height="21"/>
+                                        <color key="backgroundColor" red="1" green="0.84283798440000002" blue="0.2041132826" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="LBs-Hn-6S0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Click shape with largest area for FUN!&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMD-P9-GHw" userLabel="Game Message Label">
+                                        <rect key="frame" x="0.0" y="72" width="600" height="22"/>
+                                        <color key="backgroundColor" red="0.97647058819999999" green="0.40000000000000002" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="e9m-EL-chs" secondAttribute="trailing" id="FgW-7Z-Xfa"/>
+                                    <constraint firstItem="sMD-P9-GHw" firstAttribute="leading" secondItem="37j-5f-HUI" secondAttribute="leading" id="L3Q-1Y-pg2"/>
+                                    <constraint firstAttribute="bottom" secondItem="sMD-P9-GHw" secondAttribute="bottom" constant="27" id="YE2-Hu-dxP"/>
+                                    <constraint firstItem="e9m-EL-chs" firstAttribute="trailing" secondItem="sMD-P9-GHw" secondAttribute="trailing" id="ch7-Bl-oc0"/>
+                                    <constraint firstItem="sMD-P9-GHw" firstAttribute="top" secondItem="e9m-EL-chs" secondAttribute="bottom" constant="24" id="oXH-vU-Iq2"/>
+                                    <constraint firstItem="e9m-EL-chs" firstAttribute="top" secondItem="37j-5f-HUI" secondAttribute="top" constant="27" id="taA-zc-cfu"/>
+                                    <constraint firstItem="e9m-EL-chs" firstAttribute="leading" secondItem="sMD-P9-GHw" secondAttribute="leading" id="vOA-ze-COt"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="sYP-Qe-uba" secondAttribute="trailing" id="90K-dm-Ylu"/>
+                            <constraint firstItem="sYP-Qe-uba" firstAttribute="leading" secondItem="Va1-o9-3DH" secondAttribute="leading" id="Div-il-ndg"/>
+                            <constraint firstItem="37j-5f-HUI" firstAttribute="top" secondItem="mHX-V0-4cL" secondAttribute="top" id="Dtx-Dg-Ke6"/>
+                            <constraint firstItem="sYP-Qe-uba" firstAttribute="top" secondItem="37j-5f-HUI" secondAttribute="bottom" id="Eh8-aL-jql"/>
+                            <constraint firstItem="37j-5f-HUI" firstAttribute="trailing" secondItem="sYP-Qe-uba" secondAttribute="trailing" id="SNe-cv-JCg"/>
+                            <constraint firstItem="sYP-Qe-uba" firstAttribute="trailing" secondItem="Va1-o9-3DH" secondAttribute="trailing" id="bzC-ah-IK2"/>
+                            <constraint firstItem="Va1-o9-3DH" firstAttribute="bottom" secondItem="9mc-te-ZrV" secondAttribute="top" id="fsL-sH-qKa"/>
+                            <constraint firstItem="sYP-Qe-uba" firstAttribute="top" secondItem="mHX-V0-4cL" secondAttribute="top" constant="121" id="pND-6O-Wbw"/>
+                            <constraint firstItem="37j-5f-HUI" firstAttribute="leading" secondItem="sYP-Qe-uba" secondAttribute="leading" id="qDJ-Ez-Par"/>
+                            <constraint firstItem="Va1-o9-3DH" firstAttribute="top" secondItem="sYP-Qe-uba" secondAttribute="bottom" id="tQg-Yz-Bmp"/>
+                            <constraint firstItem="Va1-o9-3DH" firstAttribute="leading" secondItem="mHX-V0-4cL" secondAttribute="leading" id="uu4-C9-4TG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="gameBoardView" destination="sYP-Qe-uba" id="hvV-W5-Yar"/>
+                        <outlet property="gameScoreLabel" destination="e9m-EL-chs" id="KPl-0Y-TgO"/>
+                        <outlet property="messageLabel" destination="sMD-P9-GHw" id="iPP-Ja-DJz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sh2-LG-jJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1077" y="353"/>
+        </scene>
+    </scenes>
+</document>
