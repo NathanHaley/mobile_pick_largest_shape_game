@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,20 +18,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWA-sp-PIl">
-                                <rect key="frame" x="275" y="562" width="50" height="30"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWA-sp-PIl">
+                                <rect key="frame" x="150" y="562" width="50" height="30"/>
                                 <state key="normal" title="Restart"/>
                                 <connections>
                                     <action selector="restartAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AC1-em-BUD"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MBX-Ng-zE2">
+                                <rect key="frame" x="150" y="150" width="300" height="300"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Yf-W5-EOh">
+                                        <rect key="frame" x="10" y="10" width="280" height="280"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <string key="text">Instructions:  Tap on the shape with the largest area to win a point.  Swip to move thru games.  Tap Restart to restart a game.  Have fun!  Tap GO to start.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpC-T2-Hcc">
+                                        <rect key="frame" x="110" y="213" width="80" height="72"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="39"/>
+                                        <state key="normal" title="GO"/>
+                                        <connections>
+                                            <action selector="instructionsGoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lru-Iw-XyK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="EsJ-HM-7C7"/>
+                                    <constraint firstAttribute="width" secondItem="MBX-Ng-zE2" secondAttribute="height" multiplier="1:1" id="gZe-gt-T0I"/>
+                                    <constraint firstAttribute="width" constant="300" id="vAU-IN-b9i"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njh-gQ-D9X">
+                                <rect key="frame" x="400" y="562" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="pRy-Ue-h1M"/>
+                                </constraints>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uqY-k3-VbI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xWA-sp-PIl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="irP-jo-9g9"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xWA-sp-PIl" secondAttribute="bottom" constant="8" symbolic="YES" id="zEm-l9-mgY"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xWA-sp-PIl" secondAttribute="bottom" constant="8" symbolic="YES" id="4qf-N7-W6e"/>
+                            <constraint firstItem="xWA-sp-PIl" firstAttribute="leading" secondItem="MBX-Ng-zE2" secondAttribute="leading" id="7q5-nC-vA2"/>
+                            <constraint firstItem="MBX-Ng-zE2" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="FUb-pR-jzE"/>
+                            <constraint firstItem="MBX-Ng-zE2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sle-BY-FHy"/>
+                            <constraint firstItem="njh-gQ-D9X" firstAttribute="trailing" secondItem="MBX-Ng-zE2" secondAttribute="trailing" id="TeP-E4-vqP"/>
+                            <constraint firstItem="xWA-sp-PIl" firstAttribute="baseline" secondItem="njh-gQ-D9X" secondAttribute="baseline" id="ZGf-Dx-cmS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="instructionsView" destination="MBX-Ng-zE2" id="N0B-tX-BaV"/>
+                        <outlet property="restartButton" destination="xWA-sp-PIl" id="oZf-Cp-iZh"/>
+                        <outlet property="saveButton" destination="njh-gQ-D9X" id="cmn-kl-bYD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

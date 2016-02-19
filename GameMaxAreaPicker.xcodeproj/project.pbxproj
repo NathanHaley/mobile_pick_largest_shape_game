@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F22121D51C72B14C0025CCF1 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22121D21C72B14C0025CCF1 /* CircleButton.swift */; };
-		F22121D61C72B14C0025CCF1 /* SquareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22121D31C72B14C0025CCF1 /* SquareButton.swift */; };
-		F22121D71C72B14C0025CCF1 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22121D41C72B14C0025CCF1 /* CustomButton.swift */; };
+		F22121D71C72B14C0025CCF1 /* ShapeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22121D41C72B14C0025CCF1 /* ShapeButtons.swift */; };
 		F22121DD1C72B1EA0025CCF1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22121DC1C72B1EA0025CCF1 /* Utils.swift */; };
 		F22121E21C72B1F40025CCF1 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22121DF1C72B1F40025CCF1 /* GameView.swift */; };
 		F22121E61C72B26F0025CCF1 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22121E41C72B26F0025CCF1 /* GameViewController.swift */; };
+		F233675A1C7500D0009A3971 /* ObjectStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23367591C7500D0009A3971 /* ObjectStyles.swift */; };
+		F233675C1C752F2F009A3971 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F233675B1C752F2F009A3971 /* DataController.swift */; };
+		F233675F1C75397B009A3971 /* MyCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F233675D1C75397B009A3971 /* MyCoreDataModel.xcdatamodeld */; };
+		F23367691C753DCE009A3971 /* Game+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23367671C753DCE009A3971 /* Game+CoreDataProperties.swift */; };
+		F233676A1C753DCE009A3971 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23367681C753DCE009A3971 /* Game.swift */; };
 		F23516221C72930E0001B7A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23516211C72930E0001B7A6 /* AppDelegate.swift */; };
 		F23516241C72930E0001B7A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23516231C72930E0001B7A6 /* ViewController.swift */; };
 		F23516271C72930E0001B7A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F23516251C72930E0001B7A6 /* Main.storyboard */; };
@@ -21,12 +24,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F22121D21C72B14C0025CCF1 /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
-		F22121D31C72B14C0025CCF1 /* SquareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareButton.swift; sourceTree = "<group>"; };
-		F22121D41C72B14C0025CCF1 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		F22121D41C72B14C0025CCF1 /* ShapeButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeButtons.swift; sourceTree = "<group>"; };
 		F22121DC1C72B1EA0025CCF1 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F22121DF1C72B1F40025CCF1 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		F22121E41C72B26F0025CCF1 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		F23367591C7500D0009A3971 /* ObjectStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectStyles.swift; sourceTree = "<group>"; };
+		F233675B1C752F2F009A3971 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		F233675E1C75397B009A3971 /* MyCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		F23367601C753AFC009A3971 /* GameMaxAreaPicker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GameMaxAreaPicker-Bridging-Header.h"; sourceTree = "<group>"; };
+		F23367671C753DCE009A3971 /* Game+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Game+CoreDataProperties.swift"; path = "../Game+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F23367681C753DCE009A3971 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = ../Game.swift; sourceTree = "<group>"; };
 		F235161E1C72930E0001B7A6 /* GameMaxAreaPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameMaxAreaPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F23516211C72930E0001B7A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F23516231C72930E0001B7A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,9 +57,11 @@
 		F22121D81C72B15C0025CCF1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F22121D21C72B14C0025CCF1 /* CircleButton.swift */,
-				F22121D31C72B14C0025CCF1 /* SquareButton.swift */,
-				F22121D41C72B14C0025CCF1 /* CustomButton.swift */,
+				F22121D41C72B14C0025CCF1 /* ShapeButtons.swift */,
+				F233675B1C752F2F009A3971 /* DataController.swift */,
+				F23367681C753DCE009A3971 /* Game.swift */,
+				F23367671C753DCE009A3971 /* Game+CoreDataProperties.swift */,
+				F233675D1C75397B009A3971 /* MyCoreDataModel.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -61,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				F22121DF1C72B1F40025CCF1 /* GameView.swift */,
+				F23367591C7500D0009A3971 /* ObjectStyles.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -87,6 +97,7 @@
 			children = (
 				F23516201C72930E0001B7A6 /* GameMaxAreaPicker */,
 				F235161F1C72930E0001B7A6 /* Products */,
+				F23367601C753AFC009A3971 /* GameMaxAreaPicker-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -185,14 +196,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F22121D61C72B14C0025CCF1 /* SquareButton.swift in Sources */,
 				F23516241C72930E0001B7A6 /* ViewController.swift in Sources */,
-				F22121D71C72B14C0025CCF1 /* CustomButton.swift in Sources */,
+				F22121D71C72B14C0025CCF1 /* ShapeButtons.swift in Sources */,
+				F233676A1C753DCE009A3971 /* Game.swift in Sources */,
+				F233675A1C7500D0009A3971 /* ObjectStyles.swift in Sources */,
 				F22121E21C72B1F40025CCF1 /* GameView.swift in Sources */,
+				F23367691C753DCE009A3971 /* Game+CoreDataProperties.swift in Sources */,
 				F22121DD1C72B1EA0025CCF1 /* Utils.swift in Sources */,
+				F233675C1C752F2F009A3971 /* DataController.swift in Sources */,
 				F23516221C72930E0001B7A6 /* AppDelegate.swift in Sources */,
 				F22121E61C72B26F0025CCF1 /* GameViewController.swift in Sources */,
-				F22121D51C72B14C0025CCF1 /* CircleButton.swift in Sources */,
+				F233675F1C75397B009A3971 /* MyCoreDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,10 +319,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = GameMaxAreaPicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nathanhaley.GameMaxAreaPicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GameMaxAreaPicker-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -316,10 +333,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = GameMaxAreaPicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nathanhaley.GameMaxAreaPicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GameMaxAreaPicker-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -345,6 +364,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F233675D1C75397B009A3971 /* MyCoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F233675E1C75397B009A3971 /* MyCoreDataModel.xcdatamodel */,
+			);
+			currentVersion = F233675E1C75397B009A3971 /* MyCoreDataModel.xcdatamodel */;
+			name = MyCoreDataModel.xcdatamodeld;
+			path = ../MyCoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F23516161C72930E0001B7A6 /* Project object */;
 }

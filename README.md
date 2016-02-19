@@ -8,9 +8,9 @@ I wanted to have different game types, circles/squares/mixed/etc, playable by si
 
 The main challenge I had with the page views, from following tutorial outlined below, was to not have pages reload automatically when revisited, scrolled to, but instead show the game as the user left it and when clicking Restart button to effect only the currently loaded game.
 
-Right now the code and organization are a mess but that will be next and then I will add saving state, user accounts, and getting layout to work for most/all devices and orientations. Will also look at adding more shapes like triangles.
+Added Saving feature using Core Data albeit about as lightly as can be for now, saving game type/score/streak, will add more features/complexity as I go. Did some house cleaning/refactoring so now it’s easier to follow the code and will play around with different design patterns and more refactoring as I go. Saved games load on first view of a their respective game screen and is deleted with the next save of said screen or if user hits that game’s Restart button, which will remove the saved game and reset the displayed game to new game state.
+ 
 
-Currently I have an issue with rotating squares getting chopped when the corners are too wide for the view they are living in.
 
 ##Tested On:
 Tested with Xcode 7.2.1, iOS 9.2, and running on iPhone 6s, portrait
@@ -33,8 +33,5 @@ Circles Game:<br>
 Squares Game:<br>
 <img src="Squares.png" alt="Squares Game  Screen" style="width: 200px;" width=200 />
 
-Circles And Squares Game:<br>
+Circles And Squares Game With 5 In A Row Streak:<br>
 <img src="CirclesAndSquares.png" alt="Circle And Squares Game  Screen" style="width: 200px;" width=200 />
-
-Messages For Streaks:<br>
-<img src="StreakMessages.png" alt="Streak Message Demo Screen" style="width: 200px;" width=200 />
