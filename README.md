@@ -27,6 +27,10 @@ https://www.youtube.com/watch?v=8bltsDG2ENQ
 
 ##Screenshots:
 
+Instructions Screen:<br>
+<img src="Circles.png" alt="Instructions Screen" style="width: 200px;" width=200 />
+
+
 Circles Game:<br>
 <img src="Circles.png" alt="Circle Game Screen" style="width: 200px;" width=200 />
 
