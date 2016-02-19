@@ -8,7 +8,7 @@ I wanted to have different game types, circles/squares/mixed/etc, playable by si
 
 The main challenge I had with the page views, from following tutorial outlined below, was to not have pages reload automatically when revisited, scrolled to, but instead show the game as the user left it and when clicking Restart button to effect only the currently loaded game.
 
-Added Saving feature using Core Data albeit about as lightly as can be for now, saving game type/score/streak, will add more features/complexity as I go. Did some house cleaning/refactoring so now it’s easier to follow the code and will play around with different design patterns and more refactoring as I go. Saved games load on first view of a their respective game screen and is deleted with the next save of said screen or if user hits that game’s Restart button, which will remove the saved game and reset the displayed game to new game state.
+Added Saving feature using Core Data albeit about as lightly as can be for now, saving game type/score/streak, will add more features/complexity as I go. Did some house cleaning/refactoring so now it’s easier to follow the code and will play around with different design patterns and more refactoring. Saved games load on first view of a their respective game screen and deleted with the next save of said screen or if user hits that game’s Restart button, which will remove the saved game and reset the displayed game to new game state.
  
 
 
