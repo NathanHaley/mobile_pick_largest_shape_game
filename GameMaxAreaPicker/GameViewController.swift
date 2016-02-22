@@ -1,10 +1,5 @@
-
-
 import UIKit
 import CoreData
-
-
-
 
 class GameViewController: UIViewController {
     
@@ -18,8 +13,10 @@ class GameViewController: UIViewController {
     var gameScore = 0
     var gameStreak = 0
     var gameBoardType: String!
-
+    
     var turnMaxArea: CGFloat = 0.0
+    var turnMaxSideLength: CGFloat = 0.0
+    var scale: CGFloat = 1.0
     
     var minShapesToDraw: CGFloat = 2.0
     var maxShapesToDraw: CGFloat = 5.0
@@ -29,6 +26,7 @@ class GameViewController: UIViewController {
     var tappedArea: CGFloat = 0.0
     
     let moc = DataController().managedObjectContext
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
@@ -55,7 +53,7 @@ class GameViewController: UIViewController {
     func checkAnswer() {
         
         print("checkAnswer: score: \(gameScore), streak: \(gameStreak), maxArea: \(round(turnMaxArea))")
-    
+        
         let answerCorrect = turnMaxArea == tappedArea
         
         if answerCorrect {
@@ -70,6 +68,9 @@ class GameViewController: UIViewController {
             
         }
         
+        scale = 1.0
+        turnMaxArea = 0.0
+        
         setScoreLabelColor()
         
         print("buttonTapped.area: \(round(tappedArea))")
@@ -81,9 +82,14 @@ class GameViewController: UIViewController {
         
         deleteGame()
         
+        setGameState(gameIsNew: true)
+        
+        scale = 1.0
+        turnMaxArea = 0.0
+        turnMaxSideLength = 0.0
+        
         gameBoardView.addShapes(shapeCountRandom,shapeType: gameBoardType)
         
-        setGameState(gameIsNew: true)
         
     }
     
@@ -93,9 +99,8 @@ class GameViewController: UIViewController {
         
         shapeCountRandom = Int(Utils.randomBetweenLower(minShapesToDraw, andUpper: maxShapesToDraw))
         
-        
         if gameIsNew {
-        
+            
             gameScore = 0
             gameStreak = 0
             messageLabel.text = defaultMessageLabelText
@@ -105,11 +110,13 @@ class GameViewController: UIViewController {
             
             setScoreLabelColor()
             tappedArea = 0.0
-
+            scale = 1.0
+            turnMaxArea = 0.0
+            turnMaxSideLength = 0.0
+            
         }
         
     }
-    
     
     func endTurn(sender: AnyObject) {
         print("endTurn")
@@ -122,10 +129,13 @@ class GameViewController: UIViewController {
         
         shapeCountRandom = Int(Utils.randomBetweenLower(minShapesToDraw, andUpper: maxShapesToDraw))
         
+        scale = 1.0
+        turnMaxArea = 0.0
+        turnMaxSideLength = 0.0
+        
         gameBoardView.addShapes(shapeCountRandom,shapeType: gameBoardType)
+        
     }
-    
-    
     
     func messageCheck() {
         print("messageCheck()")
@@ -165,7 +175,7 @@ class GameViewController: UIViewController {
         } else {
             gameScoreLabel.textColor = UIColor.blackColor()
         }
-
+        
     }
     
     func loadGame(Games: [Game]) {
@@ -197,7 +207,7 @@ class GameViewController: UIViewController {
             let fetchedGames = try moc.executeFetchRequest(gameFetch) as! [Game]
             
             return fetchedGames
-        
+            
         } catch {
             fatalError("Could not fetch games. \(error)")
             
@@ -208,7 +218,7 @@ class GameViewController: UIViewController {
     }
     
     func deleteGame() {
-    
+        
         let fetchedGames = fetchGame()
         
         
@@ -231,7 +241,7 @@ class GameViewController: UIViewController {
     }
     
     func insertGame() {
-
+        
         //Delete before inserting for now
         deleteGame()
         
@@ -253,7 +263,6 @@ class GameViewController: UIViewController {
             fatalError("Failure to save context: \(error)")
         }
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

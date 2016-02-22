@@ -6,51 +6,134 @@
 //  Copyright © 2016 RepublicOfApps, LLC. All rights reserved.
 //
 
+//TODO: Refactor to not be so tightly coupled with GameViewController
+
 import UIKit
 
 class GameView: UIView {
     
     var gc: GameViewController!
+    var isNew = true
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
         
-        addShapes(gc.shapeCountRandom,shapeType: gc.gameBoardType)
+        addShapes(gc.shapeCountRandom, shapeType: gc.gameBoardType)
+    }
+    
+    
+    //TODO: Look at simplifying this in conjunction with addShapes, start by pulling out repeats
+    func positionShapes(forRotation forRotation: Bool = false) {
+        
+        let shapeCount = subviews.count
+        let longBound = max(bounds.width,bounds.height)
+        let shortBound = min(bounds.width,bounds.height)
+        var sectionLength = min(longBound / CGFloat(shapeCount), shortBound)
+        
+        let positionalCenter = {(index: Int) in sectionLength * CGFloat(index + 1) - sectionLength * 0.5}
+        var index = 0
+        
+        print("shortBound: \(shortBound), sectionLength: \(sectionLength)")
+        print("turnMaxSideLength: \(gc.turnMaxSideLength)), sectionLength \(sectionLength)")
+        
+        for shape in subviews {
+            
+            let button = shape as! CustomButton
+            var shapeCenterX: CGFloat = 0.0
+            var shapeCenterY: CGFloat = 0.0
+            var sideLength: CGFloat!
+            
+            let portraitView = longBound == bounds.height
+            
+            if portraitView {
+                
+                print("portrait gc.scale: \(gc.scale)")
+                
+                //gc.scale should be 1.0 or will be scale applied in landscape which this will back out
+                sideLength = button.frame.width / gc.scale
+                
+                shapeCenterX = bounds.midX
+                shapeCenterY = positionalCenter(index)
+                
+            } else {
+                
+                //Check and set scale if needed
+                if Int(gc.turnMaxSideLength) > Int(sectionLength) {
+                    gc.scale = sectionLength / gc.turnMaxSideLength
+                    
+                    gc.turnMaxArea = 0.0
+                }
+                
+                //TODO: reseting this to max here works but find better solution
+                sectionLength = max(longBound / CGFloat(shapeCount), shortBound)
+                
+                print("landscape gc.scale: \(gc.scale)")
+                
+                sideLength = button.frame.width * gc.scale
+                
+                shapeCenterX = positionalCenter(index)
+                shapeCenterY = bounds.midY
+                
+            }
+            
+            let size = CGSize(width: sideLength, height: sideLength)
+            
+            button.sizeThatFits(size)
+            button.frame.size = size
+            
+            button.center = CGPoint(x: shapeCenterX, y: shapeCenterY)
+            
+            index++
+        }
+        
+        for shape in subviews {
+            vetMaxAreaAndSideLength(shape as! CustomButton)
+        }
+        
+    }
+    
+    func vetMaxAreaAndSideLength(sender: CustomButton) {
+        
+        //Find/set the area from the largest shape
+        if sender.area > gc.turnMaxArea  {
+            gc.turnMaxArea = sender.area
+        }
+        
+        if sender.frame.width > gc.turnMaxSideLength {
+            gc.turnMaxSideLength = sender.frame.width
+        }
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        print("layoutSubviews: bounds.width: \(bounds.width), bounds.height: \(bounds.height)")
+        if !isNew {
+            positionShapes(forRotation: true)
+        }
         
     }
     
     func addShapes(addCount: Int, shapeType: String = "circles") {
         
         print("pageIndex: \(gc.pageIndex)")
-        
         print("addShapes(addCount: \(addCount), shapeType: String = \(shapeType))")
         
-        let height = bounds.height / CGFloat(addCount)
-        let shapeCenterX = bounds.midX
-        
-        //Reset maxArea
-        gc.turnMaxArea = 0.0
+        let longBound = max(bounds.width,bounds.height)
+        let shortBound = min(bounds.width,bounds.height)
+        let sectionLength = min(longBound / CGFloat(addCount), shortBound)
         
         //Clear any previous views for clean slate
         for view in self.subviews {
             view.removeFromSuperview()
         }
         
-        for i in 0..<addCount {
+        for _ in 0..<addCount {
             
             let randomFactor = Utils.randomBetweenLower(0.3, andUpper: 0.8)
-            let randomSideLength = height * randomFactor
-            let xyOffset = 0.5 * randomSideLength
-            
-            let shapeCenterY = (height * CGFloat(i)) + (0.5 * sqrt(randomSideLength * randomSideLength))
-            
-            let x = shapeCenterX - xyOffset
-            let y = shapeCenterY - xyOffset
-            
-            //print("y: \(y), randomSideLength: \(randomSideLength)")
-            
-            let newFrame = CGRect(x: x, y: y, width: randomSideLength, height: randomSideLength)
-            
+            let randomSideLength = sectionLength * randomFactor
+            let newFrame = CGRect(x: 0.0, y: 0.0, width: randomSideLength, height: randomSideLength)
             var newShapeButton: CustomButton!
             
             if gc.gameBoardType == "circles" {
@@ -67,25 +150,24 @@ class GameView: UIView {
                 }
             }
             
-            newShapeButton.center = CGPoint(x: shapeCenterX, y: shapeCenterY)
-            
             addSubview(newShapeButton)
             
             newShapeButton.addTarget(self, action: "tappedShapeAction:", forControlEvents: UIControlEvents.TouchDown)
             
-            //Find/set the area from the largest shape
-            if newShapeButton.area > gc.turnMaxArea  {
-                gc.turnMaxArea = newShapeButton.area
-            }
-            
             //Apply visuals
             newShapeButton.fillColor = Utils.randomColor()
             newShapeButton.outlineColor = Utils.randomColor()
-            newShapeButton.halfLineWidth = 3.0
+            
+            vetMaxAreaAndSideLength(newShapeButton)
             
         }
         
+        positionShapes()
+        isNew = false
+        
     }
+    
+    
     
     func tappedShapeAction(sender: CustomButton!) {
         
