@@ -35,7 +35,7 @@ Circles Game:<br>
 <img src="Circles.png" alt="Circle Game Screen" style="width: 200px;" width=200 />
 
 Circles Game Landscape:<br>
-<img src="CirclesLandscape.png" alt="Circle Game In Landscape Screen" style="width: 200px;" width=200 />
+<img src="CirclesLandscape.png" alt="Circle Game In Landscape Screen" style="height: 200px;" height=200 />
 
 Squares Game:<br>
 <img src="Squares.png" alt="Squares Game  Screen" style="width: 200px;" width=200 />
