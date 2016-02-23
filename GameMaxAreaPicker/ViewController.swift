@@ -107,7 +107,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
     
     func viewControllerAtIndex(index: Int) -> GameViewController {
         
-        print("viewControllerAtIndex(index: \(index))")
+        //print("viewControllerAtIndex(index: \(index))")
         
         return gc[index]
         

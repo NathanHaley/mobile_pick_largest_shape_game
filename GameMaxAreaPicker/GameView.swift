@@ -13,7 +13,9 @@ import UIKit
 class GameView: UIView {
     
     var gc: GameViewController!
+    var shapeCount = 0
     var isNew = true
+    var isPortraitView = UIApplication.sharedApplication().statusBarOrientation.isPortrait
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
@@ -24,57 +26,63 @@ class GameView: UIView {
     
     //TODO: Look at simplifying this in conjunction with addShapes, start by pulling out repeats
     func positionShapes(forRotation forRotation: Bool = false) {
+
         
         let shapeCount = subviews.count
-        let longBound = max(bounds.width,bounds.height)
-        let shortBound = min(bounds.width,bounds.height)
-        var sectionLength = min(longBound / CGFloat(shapeCount), shortBound)
+        let sizes = sizeShapes(shapeCount)
         
+        let sectionLength = sizes["sectionLength"]!
+        let shapeSideLengthMax = sizes["shapeSideLengthMax"]!
+
         let positionalCenter = {(index: Int) in sectionLength * CGFloat(index + 1) - sectionLength * 0.5}
         var index = 0
         
-        print("shortBound: \(shortBound), sectionLength: \(sectionLength)")
-        print("turnMaxSideLength: \(gc.turnMaxSideLength)), sectionLength \(sectionLength)")
+        print("turnMaxSideLength: \(gc.turnMaxSideLength)), shapeSideLengthMax \(shapeSideLengthMax)")
+        
+        print(Int(gc.turnMaxSideLength) > Int(shapeSideLengthMax))
+        
+        //TODO: Get this out of loop
+        //Check and set scale if needed
+        if Int(gc.turnMaxSideLength) > Int(shapeSideLengthMax) {
+            gc.scale = shapeSideLengthMax / gc.turnMaxSideLength
+            
+            gc.turnMaxArea = 0.0
+            gc.turnMaxSideLength = 0.0
+        }
         
         for shape in subviews {
             
             let button = shape as! CustomButton
             var shapeCenterX: CGFloat = 0.0
             var shapeCenterY: CGFloat = 0.0
-            var sideLength: CGFloat!
+            var sideLength = button.bounds.width
             
-            let portraitView = longBound == bounds.height
-            
-            if portraitView {
+            if isPortraitView {
                 
                 print("portrait gc.scale: \(gc.scale)")
                 
                 //gc.scale should be 1.0 or will be scale applied in landscape which this will back out
-                sideLength = button.frame.width / gc.scale
+                
+                sideLength = button.originalSize.width
                 
                 shapeCenterX = bounds.midX
                 shapeCenterY = positionalCenter(index)
                 
+                
             } else {
                 
-                //Check and set scale if needed
-                if Int(gc.turnMaxSideLength) > Int(sectionLength) {
-                    gc.scale = sectionLength / gc.turnMaxSideLength
-                    
-                    gc.turnMaxArea = 0.0
-                }
                 
-                //TODO: reseting this to max here works but find better solution
-                sectionLength = max(longBound / CGFloat(shapeCount), shortBound)
                 
                 print("landscape gc.scale: \(gc.scale)")
                 
-                sideLength = button.frame.width * gc.scale
+                sideLength = sideLength * gc.scale
                 
                 shapeCenterX = positionalCenter(index)
                 shapeCenterY = bounds.midY
                 
             }
+            
+            //print("sidelength: \(sideLength)")
             
             let size = CGSize(width: sideLength, height: sideLength)
             
@@ -86,19 +94,48 @@ class GameView: UIView {
             index++
         }
         
+        //If we've backed out previous scale need to reset this
+        if isPortraitView {
+            gc.scale = 1.0
+        }
+        
         for shape in subviews {
             vetMaxAreaAndSideLength(shape as! CustomButton)
         }
         
     }
     
-    func vetMaxAreaAndSideLength(sender: CustomButton) {
+    func sizeShapes(shapeCount: Int) -> [String: CGFloat] {
         
+        var longBound = max(bounds.width,bounds.height)
+        
+        if isPortraitView {
+            longBound -= 60 //TODO: Adjusting for toolbar until I figure out better layout approach
+        }
+        
+        let shortBound = min(bounds.width,bounds.height)
+        let  sectionLength = longBound / CGFloat(shapeCount)
+        
+        
+        var shapeSideLengthMax = min(longBound / CGFloat(shapeCount), shortBound) //Use min to avoid clipping
+        
+        if shortBound < shapeSideLengthMax {
+            shapeSideLengthMax = shortBound
+        }
+        
+        let sizes = ["longBound": longBound, "shortBound": shortBound, "sectionLength": sectionLength, "shapeSideLengthMax": shapeSideLengthMax]
+        
+        return sizes
+        
+    }
+    
+    func vetMaxAreaAndSideLength(sender: CustomButton) {
+        print("sender.area: \(sender.area), sender.frame.width: \(sender.frame.width)")
         //Find/set the area from the largest shape
         if sender.area > gc.turnMaxArea  {
             gc.turnMaxArea = sender.area
         }
-        
+        print("gc.turnMaxArea: \(gc.turnMaxArea), gc.turnMaxSideLength: \(gc.turnMaxSideLength)")
         if sender.frame.width > gc.turnMaxSideLength {
             gc.turnMaxSideLength = sender.frame.width
         }
@@ -108,21 +145,24 @@ class GameView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        print("layoutSubviews: bounds.width: \(bounds.width), bounds.height: \(bounds.height)")
+        //print("layoutSubviews: bounds.width: \(bounds.width), bounds.height: \(bounds.height)")
+        
         if !isNew {
             positionShapes(forRotation: true)
         }
         
+        isPortraitView = UIApplication.sharedApplication().statusBarOrientation.isPortrait
+        
     }
     
+    //Handles initial shape creation
     func addShapes(addCount: Int, shapeType: String = "circles") {
         
-        print("pageIndex: \(gc.pageIndex)")
-        print("addShapes(addCount: \(addCount), shapeType: String = \(shapeType))")
+        //print("pageIndex: \(gc.pageIndex)")
+        //print("addShapes(addCount: \(addCount), shapeType: String = \(shapeType))")
         
-        let longBound = max(bounds.width,bounds.height)
-        let shortBound = min(bounds.width,bounds.height)
-        let sectionLength = min(longBound / CGFloat(addCount), shortBound)
+        let sizes = sizeShapes(addCount)
+        let shapeSideLengthMax = sizes["shapeSideLengthMax"]!
         
         //Clear any previous views for clean slate
         for view in self.subviews {
@@ -132,7 +172,7 @@ class GameView: UIView {
         for _ in 0..<addCount {
             
             let randomFactor = Utils.randomBetweenLower(0.3, andUpper: 0.8)
-            let randomSideLength = sectionLength * randomFactor
+            let randomSideLength = shapeSideLengthMax * randomFactor
             let newFrame = CGRect(x: 0.0, y: 0.0, width: randomSideLength, height: randomSideLength)
             var newShapeButton: CustomButton!
             
@@ -154,6 +194,8 @@ class GameView: UIView {
             
             newShapeButton.addTarget(self, action: "tappedShapeAction:", forControlEvents: UIControlEvents.TouchDown)
             
+            newShapeButton.originalSize = newShapeButton.frame.size
+            
             //Apply visuals
             newShapeButton.fillColor = Utils.randomColor()
             newShapeButton.outlineColor = Utils.randomColor()
@@ -174,8 +216,8 @@ class GameView: UIView {
         //var tappedButton = sender
         gc.tappedArea = sender.area
         
-        print("gc.tappedButton.area: \(sender.area)")
-        print("shapeTap\(gc.pageIndex)")
+        //print("gc.tappedButton.area: \(sender.area)")
+        //print("shapeTap\(gc.pageIndex)")
         
         NSNotificationCenter.defaultCenter().postNotificationName("shapeTap\(gc.pageIndex)", object: nil)
         

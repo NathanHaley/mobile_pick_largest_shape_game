@@ -44,6 +44,7 @@ class CustomButton: UIButton {
   var fillColor: UIColor = UIColor.grayColor()
   var outlineColor: UIColor = UIColor.blackColor()
   var halfLineWidth: CGFloat = 3.0 //Controls border width
+    var originalSize: CGSize = CGSize(width: 0.0, height: 0.0)
   
   var areaFactor: CGFloat!
   var area: CGFloat { return 0.0}

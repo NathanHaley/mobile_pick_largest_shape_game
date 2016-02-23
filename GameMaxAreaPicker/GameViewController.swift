@@ -24,6 +24,7 @@ class GameViewController: UIViewController {
     var shapeCountRandom: Int!
     
     var tappedArea: CGFloat = 0.0
+
     
     let moc = DataController().managedObjectContext
     
@@ -31,7 +32,7 @@ class GameViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
         
-        print("viewWillAppear(\(pageIndex))")
+        //print("viewWillAppear(\(pageIndex))")
         
         gameCurrentIndex = pageIndex
         
@@ -40,7 +41,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("viewDidLoad(\(pageIndex))")
+        //print("viewDidLoad(\(pageIndex))")
         
         gameBoardView.gc = self
         
@@ -52,7 +53,7 @@ class GameViewController: UIViewController {
     
     func checkAnswer() {
         
-        print("checkAnswer: score: \(gameScore), streak: \(gameStreak), maxArea: \(round(turnMaxArea))")
+        //print("checkAnswer: score: \(gameScore), streak: \(gameStreak), maxArea: \(round(turnMaxArea))")
         
         let answerCorrect = turnMaxArea == tappedArea
         
@@ -73,7 +74,7 @@ class GameViewController: UIViewController {
         
         setScoreLabelColor()
         
-        print("buttonTapped.area: \(round(tappedArea))")
+        //print("buttonTapped.area: \(round(tappedArea))")
         
     }
     
@@ -88,6 +89,8 @@ class GameViewController: UIViewController {
         turnMaxArea = 0.0
         turnMaxSideLength = 0.0
         
+        
+        //TODO: Fix odd order of depending on call to setGameState() to have shapeCountRandom set
         gameBoardView.addShapes(shapeCountRandom,shapeType: gameBoardType)
         
         
@@ -95,7 +98,7 @@ class GameViewController: UIViewController {
     
     func setGameState(gameIsNew gameIsNew: Bool) {
         
-        print("setGameState()")
+        //print("setGameState()")
         
         shapeCountRandom = Int(Utils.randomBetweenLower(minShapesToDraw, andUpper: maxShapesToDraw))
         
@@ -119,7 +122,7 @@ class GameViewController: UIViewController {
     }
     
     func endTurn(sender: AnyObject) {
-        print("endTurn")
+        //print("endTurn")
         
         checkAnswer()
         
@@ -138,7 +141,7 @@ class GameViewController: UIViewController {
     }
     
     func messageCheck() {
-        print("messageCheck()")
+        //print("messageCheck()")
         
         switch gameStreak {
         case 2:
@@ -166,7 +169,7 @@ class GameViewController: UIViewController {
     }
     
     func setScoreLabelColor() {
-        print("setScoreLabelColor()")
+        //print("setScoreLabelColor()")
         
         let scoreIsNegative = gameScore < 0
         
@@ -183,7 +186,7 @@ class GameViewController: UIViewController {
         for game in Games {
             
             if game.type! == self.gameBoardType {
-                print("Loaded Game type: \(game.type!) score: \(game.score!) streak: \(game.streak!)")
+                //print("Loaded Game type: \(game.type!) score: \(game.score!) streak: \(game.streak!)")
                 gameScore = Int(game.score!)
                 gameStreak = Int(game.streak!)
                 gameScoreLabel.text = String(gameScore)
@@ -196,7 +199,7 @@ class GameViewController: UIViewController {
     
     func fetchGame() -> [Game] {
         
-        print("self.gameBoardType == \(self.gameBoardType)")
+        //print("self.gameBoardType == \(self.gameBoardType)")
         
         let predicate = NSPredicate(format: "type == %@", self.gameBoardType)
         
@@ -224,7 +227,7 @@ class GameViewController: UIViewController {
         
         for game in fetchedGames {
             moc.deleteObject(game)
-            print("Deleting Game type: \(game.type!) score: \(game.score!) streak: \(game.streak!)")
+            //print("Deleting Game type: \(game.type!) score: \(game.score!) streak: \(game.streak!)")
         }
         
         saveGame()
@@ -232,10 +235,10 @@ class GameViewController: UIViewController {
         do {
             try moc.save()
             
-            print("Saving after delete")
+            //print("Saving after delete")
         } catch {
             // Do something in response to error condition
-            print("Counld not save after deleting game: \(error)")
+           // print("Counld not save after deleting game: \(error)")
         }
         
     }
@@ -251,7 +254,7 @@ class GameViewController: UIViewController {
         game.setValue(self.gameScore, forKey: "score")
         game.setValue(self.gameStreak, forKey: "streak")
         
-        print("Inserting Game type: \(game.type!) score: \(game.score!) streak: \(game.streak!)")
+        //print("Inserting Game type: \(game.type!) score: \(game.score!) streak: \(game.streak!)")
         saveGame()
         
     }
@@ -267,7 +270,7 @@ class GameViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        print("WARNING: didReceiveMemoryWarning()")
+        //print("WARNING: didReceiveMemoryWarning()")
     }
     
     
