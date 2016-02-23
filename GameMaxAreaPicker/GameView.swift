@@ -61,8 +61,7 @@ class GameView: UIView {
                 
                 print("portrait gc.scale: \(gc.scale)")
                 
-                //gc.scale should be 1.0 or will be scale applied in landscape which this will back out
-                
+                //Incase we scaled to fit landscape, set back to original size
                 sideLength = button.originalSize.width
                 
                 shapeCenterX = bounds.midX
