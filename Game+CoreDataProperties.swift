@@ -19,3 +19,4 @@ extension Game {
     @NSManaged var streak: NSNumber?
 
 }
+

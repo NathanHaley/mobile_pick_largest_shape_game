@@ -41,7 +41,6 @@ class GameView: UIView {
         
         print(Int(gc.turnMaxSideLength) > Int(shapeSideLengthMax))
         
-        //TODO: Get this out of loop
         //Check and set scale if needed
         if Int(gc.turnMaxSideLength) > Int(shapeSideLengthMax) {
             gc.scale = shapeSideLengthMax / gc.turnMaxSideLength
@@ -146,11 +145,13 @@ class GameView: UIView {
         
         //print("layoutSubviews: bounds.width: \(bounds.width), bounds.height: \(bounds.height)")
         
+        isPortraitView = UIApplication.sharedApplication().statusBarOrientation.isPortrait
+        
         if !isNew {
             positionShapes(forRotation: true)
         }
         
-        isPortraitView = UIApplication.sharedApplication().statusBarOrientation.isPortrait
+        
         
     }
     
@@ -212,7 +213,6 @@ class GameView: UIView {
     
     func tappedShapeAction(sender: CustomButton!) {
         
-        //var tappedButton = sender
         gc.tappedArea = sender.area
         
         //print("gc.tappedButton.area: \(sender.area)")

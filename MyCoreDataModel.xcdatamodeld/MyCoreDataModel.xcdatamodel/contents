@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
     <entity name="Game" representedClassName=".Game" syncable="YES">
+        <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="streak" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Shape" representedClassName=".Shape" syncable="YES">
+        <attribute name="current_size" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fill_color" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="game_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="halfLine_width" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="original_size" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="outline_color" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shape_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sort_order" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Game" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="Game" positionX="-27" positionY="0" width="128" height="103"/>
+        <element name="Shape" positionX="-9" positionY="-18" width="128" height="165"/>
     </elements>
 </model>

@@ -238,7 +238,7 @@ class GameViewController: UIViewController {
             //print("Saving after delete")
         } catch {
             // Do something in response to error condition
-           // print("Counld not save after deleting game: \(error)")
+           print("Counld not save after deleting game: \(error)")
         }
         
     }
@@ -253,6 +253,10 @@ class GameViewController: UIViewController {
         game.setValue(self.gameBoardType, forKey: "type")
         game.setValue(self.gameScore, forKey: "score")
         game.setValue(self.gameStreak, forKey: "streak")
+        
+        let shape = NSEntityDescription.insertNewObjectForEntityForName("Shape", inManagedObjectContext: moc) as! Shape
+        
+        
         
         //print("Inserting Game type: \(game.type!) score: \(game.score!) streak: \(game.streak!)")
         saveGame()
