@@ -1,10 +1,3 @@
-//
-//  GameViewsContainer.swift
-//  DesignPatternsInSwift
-//
-//  Created by Nathan Haley on 2/13/16.
-//  Copyright © 2016 RepublicOfApps, LLC. All rights reserved.
-//
 
 //TODO: Refactor to not be so tightly coupled with GameViewController
 
@@ -12,22 +5,17 @@ import UIKit
 
 class GameView: UIView {
     
+    // MARK: Properties
+    
     var gc: GameViewController!
     var shapeCount = 0
     var isNew = true
     var isPortraitView = UIApplication.sharedApplication().statusBarOrientation.isPortrait
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
-        
-        addShapes(gc.shapeCountRandom, shapeType: gc.gameBoardType)
-    }
-    
-    
-    //TODO: Look at simplifying this in conjunction with addShapes, start by pulling out repeats
+    // MARK: Shape positioning and scaling
+    // TODO: Look at simplifying this in conjunction with addShapes, start by pulling out repeats
     func positionShapes(forRotation forRotation: Bool = false) {
 
-        
         let shapeCount = subviews.count
         let sizes = sizeShapes(shapeCount)
         
@@ -37,11 +25,7 @@ class GameView: UIView {
         let positionalCenter = {(index: Int) in sectionLength * CGFloat(index + 1) - sectionLength * 0.5}
         var index = 0
         
-        print("turnMaxSideLength: \(gc.turnMaxSideLength)), shapeSideLengthMax \(shapeSideLengthMax)")
-        
-        print(Int(gc.turnMaxSideLength) > Int(shapeSideLengthMax))
-        
-        //Check and set scale if needed
+        // Check and set scale if needed
         if Int(gc.turnMaxSideLength) > Int(shapeSideLengthMax) {
             gc.scale = shapeSideLengthMax / gc.turnMaxSideLength
             
@@ -58,9 +42,7 @@ class GameView: UIView {
             
             if isPortraitView {
                 
-                print("portrait gc.scale: \(gc.scale)")
-                
-                //Incase we scaled to fit landscape, set back to original size
+                // Incase we scaled to fit landscape, set back to original size
                 sideLength = button.originalSize.width
                 
                 shapeCenterX = bounds.midX
@@ -69,18 +51,12 @@ class GameView: UIView {
                 
             } else {
                 
-                
-                
-                print("landscape gc.scale: \(gc.scale)")
-                
                 sideLength = sideLength * gc.scale
                 
                 shapeCenterX = positionalCenter(index)
                 shapeCenterY = bounds.midY
                 
             }
-            
-            //print("sidelength: \(sideLength)")
             
             let size = CGSize(width: sideLength, height: sideLength)
             
@@ -92,7 +68,7 @@ class GameView: UIView {
             index++
         }
         
-        //If we've backed out previous scale need to reset this
+        // If we've backed out previous scale need to reset this
         if isPortraitView {
             gc.scale = 1.0
         }
@@ -103,68 +79,13 @@ class GameView: UIView {
         
     }
     
-    func sizeShapes(shapeCount: Int) -> [String: CGFloat] {
-        
-        var longBound = max(bounds.width,bounds.height)
-        
-        if isPortraitView {
-            longBound -= 60 //TODO: Adjusting for toolbar until I figure out better layout approach
-        }
-        
-        let shortBound = min(bounds.width,bounds.height)
-        let  sectionLength = longBound / CGFloat(shapeCount)
-        
-        
-        var shapeSideLengthMax = min(longBound / CGFloat(shapeCount), shortBound) //Use min to avoid clipping
-        
-        if shortBound < shapeSideLengthMax {
-            shapeSideLengthMax = shortBound
-        }
-        
-        let sizes = ["longBound": longBound, "shortBound": shortBound, "sectionLength": sectionLength, "shapeSideLengthMax": shapeSideLengthMax]
-        
-        return sizes
-        
-    }
-    
-    func vetMaxAreaAndSideLength(sender: CustomButton) {
-        print("sender.area: \(sender.area), sender.frame.width: \(sender.frame.width)")
-        //Find/set the area from the largest shape
-        if sender.area > gc.turnMaxArea  {
-            gc.turnMaxArea = sender.area
-        }
-        print("gc.turnMaxArea: \(gc.turnMaxArea), gc.turnMaxSideLength: \(gc.turnMaxSideLength)")
-        if sender.frame.width > gc.turnMaxSideLength {
-            gc.turnMaxSideLength = sender.frame.width
-        }
-        
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        //print("layoutSubviews: bounds.width: \(bounds.width), bounds.height: \(bounds.height)")
-        
-        isPortraitView = UIApplication.sharedApplication().statusBarOrientation.isPortrait
-        
-        if !isNew {
-            positionShapes(forRotation: true)
-        }
-        
-        
-        
-    }
-    
-    //Handles initial shape creation
+    // MARK: Shape creation
     func addShapes(addCount: Int, shapeType: String = "circles") {
-        
-        //print("pageIndex: \(gc.pageIndex)")
-        //print("addShapes(addCount: \(addCount), shapeType: String = \(shapeType))")
         
         let sizes = sizeShapes(addCount)
         let shapeSideLengthMax = sizes["shapeSideLengthMax"]!
         
-        //Clear any previous views for clean slate
+        // Clear any previous views for clean slate
         for view in self.subviews {
             view.removeFromSuperview()
         }
@@ -209,17 +130,71 @@ class GameView: UIView {
         
     }
     
+    // MARK: Shape helpers
     
+    func sizeShapes(shapeCount: Int) -> [String: CGFloat] {
+        
+        var longBound = max(bounds.width,bounds.height)
+        
+        if isPortraitView {
+            longBound -= 60 // TODO: Adjusting for toolbar until I figure out better layout approach
+        }
+        
+        let shortBound = min(bounds.width,bounds.height)
+        let  sectionLength = longBound / CGFloat(shapeCount)
+        
+        
+        var shapeSideLengthMax = min(longBound / CGFloat(shapeCount), shortBound) //Use min to avoid clipping
+        
+        if shortBound < shapeSideLengthMax {
+            shapeSideLengthMax = shortBound
+        }
+        
+        let sizes = ["longBound": longBound, "shortBound": shortBound, "sectionLength": sectionLength, "shapeSideLengthMax": shapeSideLengthMax]
+        
+        return sizes
+        
+    }
+    
+    func vetMaxAreaAndSideLength(sender: CustomButton) {
+    
+        // Find/set the area from the largest shape
+        if sender.area > gc.turnMaxArea  {
+            gc.turnMaxArea = sender.area
+        }
+
+        if sender.frame.width > gc.turnMaxSideLength {
+            gc.turnMaxSideLength = sender.frame.width
+        }
+        
+    }
+    
+    // MARK: Overrides
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        isPortraitView = UIApplication.sharedApplication().statusBarOrientation.isPortrait
+        
+        if !isNew {
+            positionShapes(forRotation: true)
+        }
+    }
+    
+    // MARK: Actions
     
     func tappedShapeAction(sender: CustomButton!) {
         
         gc.tappedArea = sender.area
         
-        //print("gc.tappedButton.area: \(sender.area)")
-        //print("shapeTap\(gc.pageIndex)")
-        
         NSNotificationCenter.defaultCenter().postNotificationName("shapeTap\(gc.pageIndex)", object: nil)
         
+    }
+    
+    override func drawRect(rect: CGRect) {
+        super.drawRect(rect)
+        
+        addShapes(gc.shapeCountRandom, shapeType: gc.gameBoardType)
     }
     
     

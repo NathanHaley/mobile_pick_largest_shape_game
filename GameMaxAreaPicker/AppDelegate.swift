@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  GameMaxAreaPicker
-//
-//  Created by Nathan Haley on 2/15/16.
-//  Copyright © 2016 Nathan Haley. All rights reserved.
-//
 
 import UIKit
 
@@ -12,6 +5,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+   //var dataController: DataController!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -21,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         pageController.pageIndicatorTintColor = UIColor.lightGrayColor()
         pageController.currentPageIndicatorTintColor = UIColor.whiteColor()
         pageController.backgroundColor = UIColor.blackColor()
+        
+       // dataController = DataController()
         
         
         return true

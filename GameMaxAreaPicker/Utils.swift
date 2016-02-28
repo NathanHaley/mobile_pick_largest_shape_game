@@ -1,15 +1,16 @@
-import Foundation
+
 import UIKit
 
 class Utils {
+    
+    // MARK: Constants
   
     static let twoPi = CGFloat(M_PI * 2)
     
-    static func randomBetweenLower(lower: CGFloat, andUpper: CGFloat) -> CGFloat {
-        
-        return lower + CGFloat(arc4random_uniform(101)) / 100.0 * (andUpper - lower)
-        
-    }
+    static let standardRoundedCornerSize: CGFloat = 10.0
+    
+    
+    // MARK: Random generators
     
     static func randomColor() -> UIColor {
         
@@ -29,11 +30,21 @@ class Utils {
         
     }
     
+    static func randomBetweenLower(lower: CGFloat, andUpper: CGFloat) -> CGFloat {
+        
+        return lower + CGFloat(arc4random_uniform(101)) / 100.0 * (andUpper - lower)
+        
+    }
+    
+    // MARK: Conversions
+    
     static func degreesToRadians(degrees: CGFloat) -> CGFloat {
         
         return CGFloat(M_PI) * (degrees) / 180.0
     
     }
+    
+    // MARK: Targeted actions
     
     static func rotateView(view: UIView) {
         
@@ -41,8 +52,6 @@ class Utils {
         view.transform = CGAffineTransformMakeRotation(degreesToRotate)
         
     }
-    
-    static let standardRoundedCornerSize: CGFloat = 10.0
     
     static func roundCorners(view: UIView) {
         

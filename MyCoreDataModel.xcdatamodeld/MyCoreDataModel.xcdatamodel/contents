@@ -5,6 +5,7 @@
         <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="streak" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="shape" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Shape" inverseName="game" inverseEntity="Shape" syncable="YES"/>
     </entity>
     <entity name="Shape" representedClassName=".Shape" syncable="YES">
         <attribute name="current_size" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -15,9 +16,10 @@
         <attribute name="outline_color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shape_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sort_order" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="shape" inverseEntity="Game" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Game" positionX="-27" positionY="0" width="128" height="103"/>
-        <element name="Shape" positionX="-9" positionY="-18" width="128" height="165"/>
+        <element name="Game" positionX="-11" positionY="-91" width="128" height="118"/>
+        <element name="Shape" positionX="-261" positionY="-153" width="128" height="178"/>
     </elements>
 </model>

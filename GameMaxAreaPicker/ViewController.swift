@@ -1,12 +1,5 @@
-//
-//  ViewController.swift
-//  GameMaxAreaPicker
-//
-//  Created by Nathan Haley on 2/15/16.
-//  Copyright © 2016 Nathan Haley. All rights reserved.
 
 //TODO: What to do about unsaved games when user closes, ask to ignore?
-//
 
 import UIKit
 import CoreData
@@ -18,38 +11,21 @@ var globalReload = true
 
 class ViewController: UIViewController, UIPageViewControllerDataSource {
     
-    var gc: [GameViewController] = []
     
-    var pageViewController: UIPageViewController?
-
-    var initialBuild = true
-    
+    // MARK: Properties
     @IBOutlet weak var instructionsView: UIView!
     @IBOutlet weak var restartButton: UIView!
     @IBOutlet weak var saveButton: UIView!
     
-    @IBAction func instructionsGoButtonTapped(sender: AnyObject) {
-        
-        instructionsView.hidden = true
-        
-        buildGame()
-    }
-
-    @IBAction func restartAction(sender: AnyObject) {
-        
-        gc[gameCurrentIndex].resetGame()
-        
-    }
-    
-    @IBAction func saveAction(sender: AnyObject) {
-        
-        gc[gameCurrentIndex].insertGame()
-        
-    }
+    var gc: [GameViewController] = []
+    var pageViewController: UIPageViewController?
+    var initialBuild = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    // MARK: Game setup
     
     func buildGame() {
         
@@ -98,21 +74,12 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         //saveButton.userInteractionEnabled = true
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     func viewControllerAtIndex(index: Int) -> GameViewController {
-        
-        //print("viewControllerAtIndex(index: \(index))")
         
         return gc[index]
         
     }
-    
     
     //MARK! -- Page View Controller Data Source
     
@@ -120,8 +87,6 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         
         let vc = viewController as! GameViewController
         var index = vc.pageIndex as Int
-        
-        //print("Before: vc.pageIndex: \(vc.pageIndex) gameCurrentIndex: \(gameCurrentIndex)")
         
         //If viewing first page do not set index to negative, sit at 0
         if (index <= 0 || index == NSNotFound) {
@@ -133,13 +98,10 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         return self.viewControllerAtIndex(index)
     }
     
-    
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
         let vc = viewController as! GameViewController
         var index = vc.pageIndex as Int
-        
-        //print("After: vc.pageIndex: \(vc.pageIndex) gameCurrentIndex: \(gameCurrentIndex)")
         
         //Do nothing with index if last game or out of bounds
         if ((index == NSNotFound) || (index >= gc.count - 1)) {
@@ -152,6 +114,8 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
 
     }
     
+    // MARK: Page view delegation
+    
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return gc.count
     }
@@ -160,10 +124,26 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         return 0
     }
     
+    // MARK: Actions
     
+    @IBAction func instructionsGoButtonTapped(sender: AnyObject) {
+        
+        instructionsView.hidden = true
+        
+        buildGame()
+    }
     
+    @IBAction func restartAction(sender: AnyObject) {
+        
+        gc[gameCurrentIndex].resetGame()
+        
+    }
     
-
+    @IBAction func saveAction(sender: AnyObject) {
+        
+        gc[gameCurrentIndex].insertGame()
+        
+    }
 
 }
 

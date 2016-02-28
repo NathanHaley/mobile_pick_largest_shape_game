@@ -1,14 +1,17 @@
+
 import UIKit
 import CoreData
 
 class GameViewController: UIViewController {
+    
+    
+    // MARK: Properties
     
     @IBOutlet weak var gameScoreLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var gameBoardView: GameView!
     
     var defaultMessageLabelText = "Click shape with largest area for FUN!"
-    
     var pageIndex: Int!
     var gameScore = 0
     var gameStreak = 0
@@ -22,38 +25,12 @@ class GameViewController: UIViewController {
     var maxShapesToDraw: CGFloat = 5.0
     
     var shapeCountRandom: Int!
-    
     var tappedArea: CGFloat = 0.0
+    var moc: NSManagedObjectContext = DataController().managedObjectContext
 
-    
-    let moc = DataController().managedObjectContext
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated);
-        
-        //print("viewWillAppear(\(pageIndex))")
-        
-        gameCurrentIndex = pageIndex
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //print("viewDidLoad(\(pageIndex))")
-        
-        gameBoardView.gc = self
-        
-        setGameState(gameIsNew: true)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "endTurn:", name:"shapeTap\(pageIndex)", object: nil)
-        
-    }
+    // MARK: Game management
     
     func checkAnswer() {
-        
-        //print("checkAnswer: score: \(gameScore), streak: \(gameStreak), maxArea: \(round(turnMaxArea))")
         
         let answerCorrect = turnMaxArea == tappedArea
         
@@ -73,8 +50,6 @@ class GameViewController: UIViewController {
         turnMaxArea = 0.0
         
         setScoreLabelColor()
-        
-        //print("buttonTapped.area: \(round(tappedArea))")
         
     }
     
@@ -98,8 +73,6 @@ class GameViewController: UIViewController {
     
     func setGameState(gameIsNew gameIsNew: Bool) {
         
-        //print("setGameState()")
-        
         shapeCountRandom = Int(Utils.randomBetweenLower(minShapesToDraw, andUpper: maxShapesToDraw))
         
         if gameIsNew {
@@ -122,7 +95,6 @@ class GameViewController: UIViewController {
     }
     
     func endTurn(sender: AnyObject) {
-        //print("endTurn")
         
         checkAnswer()
         
@@ -141,7 +113,6 @@ class GameViewController: UIViewController {
     }
     
     func messageCheck() {
-        //print("messageCheck()")
         
         switch gameStreak {
         case 2:
@@ -169,7 +140,6 @@ class GameViewController: UIViewController {
     }
     
     func setScoreLabelColor() {
-        //print("setScoreLabelColor()")
         
         let scoreIsNegative = gameScore < 0
         
@@ -181,12 +151,33 @@ class GameViewController: UIViewController {
         
     }
     
+    //MARK: Overrides
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        
+        gameCurrentIndex = pageIndex
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        gameBoardView.gc = self
+        
+        setGameState(gameIsNew: true)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "endTurn:", name:"shapeTap\(pageIndex)", object: nil)
+        
+    }
+    
+    //MARK: CoreData data handlers
+    
     func loadGame(Games: [Game]) {
         
         for game in Games {
             
             if game.type! == self.gameBoardType {
-                //print("Loaded Game type: \(game.type!) score: \(game.score!) streak: \(game.streak!)")
                 gameScore = Int(game.score!)
                 gameStreak = Int(game.streak!)
                 gameScoreLabel.text = String(gameScore)
@@ -198,8 +189,6 @@ class GameViewController: UIViewController {
     }
     
     func fetchGame() -> [Game] {
-        
-        //print("self.gameBoardType == \(self.gameBoardType)")
         
         let predicate = NSPredicate(format: "type == %@", self.gameBoardType)
         
@@ -226,16 +215,17 @@ class GameViewController: UIViewController {
         
         
         for game in fetchedGames {
+            
             moc.deleteObject(game)
-            //print("Deleting Game type: \(game.type!) score: \(game.score!) streak: \(game.streak!)")
+
         }
         
         saveGame()
         
         do {
+            
             try moc.save()
             
-            //print("Saving after delete")
         } catch {
             // Do something in response to error condition
            print("Counld not save after deleting game: \(error)")
@@ -254,12 +244,8 @@ class GameViewController: UIViewController {
         game.setValue(self.gameScore, forKey: "score")
         game.setValue(self.gameStreak, forKey: "streak")
         
-        let shape = NSEntityDescription.insertNewObjectForEntityForName("Shape", inManagedObjectContext: moc) as! Shape
-        
-        
-        
-        //print("Inserting Game type: \(game.type!) score: \(game.score!) streak: \(game.streak!)")
-        saveGame()
+        // TODO: Implement shape data
+        //let shape = NSEntityDescription.insertNewObjectForEntityForName("Shape", inManagedObjectContext: moc) as! Shape
         
     }
     
@@ -270,12 +256,5 @@ class GameViewController: UIViewController {
             fatalError("Failure to save context: \(error)")
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-        //print("WARNING: didReceiveMemoryWarning()")
-    }
-    
     
 }

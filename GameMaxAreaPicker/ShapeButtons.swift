@@ -2,43 +2,7 @@
 import UIKit
 import CoreData
 
-
-class CircleButton: CustomButton {
-    
-    override var area: CGFloat { return (bounds.width * 0.5) * (bounds.width * 0.5) * CGFloat(M_PI) }
-    
-    
-    override func getOutlinePath() -> UIBezierPath {
-        let outlinePath = UIBezierPath(ovalInRect: CGRect(
-            x: halfLineWidth,
-            y: halfLineWidth,
-            width: bounds.size.width - 2 * halfLineWidth,
-            height: bounds.size.height - 2 * halfLineWidth))
-        
-        return outlinePath
-    }
-    
-}
-
-
-
-class SquareButton: CustomButton {
-    
-    override var area: CGFloat { return bounds.width * bounds.width }
-    
-    override func getOutlinePath() -> UIBezierPath {
-        let outlinePath = UIBezierPath(rect: CGRect(
-            x: halfLineWidth,
-            y: halfLineWidth,
-            width: bounds.size.width - 2 * halfLineWidth,
-            height: bounds.size.height - 2 * halfLineWidth))
-        
-        return outlinePath
-    }
-    
-}
-
-
+// MARK: Parent shape class
 
 class CustomButton: UIButton {
     var fillColor: UIColor = UIColor.grayColor()
@@ -86,5 +50,40 @@ class CustomButton: UIButton {
         
     }
     
+    
+}
+
+// MARK: Child shapes
+
+class CircleButton: CustomButton {
+    
+    override var area: CGFloat { return (bounds.width * 0.5) * (bounds.width * 0.5) * CGFloat(M_PI) }
+    
+    
+    override func getOutlinePath() -> UIBezierPath {
+        let outlinePath = UIBezierPath(ovalInRect: CGRect(
+            x: halfLineWidth,
+            y: halfLineWidth,
+            width: bounds.size.width - 2 * halfLineWidth,
+            height: bounds.size.height - 2 * halfLineWidth))
+        
+        return outlinePath
+    }
+    
+}
+
+class SquareButton: CustomButton {
+    
+    override var area: CGFloat { return bounds.width * bounds.width }
+    
+    override func getOutlinePath() -> UIBezierPath {
+        let outlinePath = UIBezierPath(rect: CGRect(
+            x: halfLineWidth,
+            y: halfLineWidth,
+            width: bounds.size.width - 2 * halfLineWidth,
+            height: bounds.size.height - 2 * halfLineWidth))
+        
+        return outlinePath
+    }
     
 }

@@ -6,7 +6,7 @@ The eventual goal is to have a well architected solution using value types, desi
 
 I want to have different game types, circles/squares/mixed/etc, playable by simply allowing user to scroll/page thru each type and just start playing by tapping a shape. After spending some time learning scroll views I found that page views handle this without me having to recreate the functionality to handle centering and knowing which page/game the user is on.
 
-Latest update always proper rendering, positioning and scaling for smaller screens. Not fully tested just yet but so far looks good in simulator for 4s, 5, 6s, IPad Air 2.
+Not fully tested just yet but so far looks good in simulator for 4s, 5, 6s, IPad Air 2. Got it working on my iPad which is pretty cool.
 
 
 ##Tested On:

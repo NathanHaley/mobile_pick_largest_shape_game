@@ -1,45 +1,59 @@
-//
-//  DataController.swift
-//  GameMaxAreaPicker
-//
-//  Created by Nathan Haley on 2/17/16.
-//  Copyright © 2016 Nathan Haley. All rights reserved.
-//
-
 
 import UIKit
 import CoreData
-import Foundation
-
 
 class DataController: NSObject {
-    var managedObjectContext: NSManagedObjectContext
+    
+    // MARK: Properties
+    
+    let dataModelName = "MyCoreDataModel"
+    var managedObjectContext: NSManagedObjectContext!
+    
+    // MARK: Init
+    
     override init() {
         
-        // This resource is the same name as your xcdatamodeld contained in your project.
-        guard let modelURL = NSBundle.mainBundle().URLForResource("MyCoreDataModel", withExtension:"momd") else {
-            fatalError("Error loading model from bundle")
+        super.init()
+        
+        guard let modelURL = NSBundle.mainBundle().URLForResource(dataModelName, withExtension:"momd")
+            
+            else {
+                
+                fatalError("Error loading model from bundle")
+                
         }
-        // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
-        guard let mom = NSManagedObjectModel(contentsOfURL: modelURL) else {
+        
+        guard let mom = NSManagedObjectModel(contentsOfURL: modelURL)
+            
+            else {
+                
             fatalError("Error initializing mom from: \(modelURL)")
+                
         }
+        
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
+        
         self.managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        
         self.managedObjectContext.persistentStoreCoordinator = psc
         
-        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            
             let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+            
             let docURL = urls[urls.endIndex-1]
-            /* The directory the application uses to store the Core Data store file.
-            This code uses a file named "DataModel.sqlite" in the application's documents directory.
-            */
-            let storeURL = docURL.URLByAppendingPathComponent("MyCoreDataModel.sqlite")
+            
+            let storeURL = docURL.URLByAppendingPathComponent("\(self.dataModelName).sqlite")
+            
             do {
+                
                 try psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
+                
             } catch {
+                
                 fatalError("Error migrating store: \(error)")
+                
             }
-       // }
+        }
     }
 }

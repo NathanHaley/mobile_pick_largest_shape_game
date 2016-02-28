@@ -23,6 +23,7 @@
 		F235162C1C72930E0001B7A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F235162A1C72930E0001B7A6 /* LaunchScreen.storyboard */; };
 		F2799DB71C7D580E00E9A6E2 /* Shape+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2799DB51C7D580E00E9A6E2 /* Shape+CoreDataProperties.swift */; };
 		F2799DB81C7D580E00E9A6E2 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2799DB61C7D580E00E9A6E2 /* Shape.swift */; };
+		F2A38E3A1C80CDF30060B4BE /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A38E391C80CDF30060B4BE /* CoreDataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		F235162D1C72930E0001B7A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2799DB51C7D580E00E9A6E2 /* Shape+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Shape+CoreDataProperties.swift"; path = "../Shape+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F2799DB61C7D580E00E9A6E2 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shape.swift; path = ../Shape.swift; sourceTree = "<group>"; };
+		F2A38E391C80CDF30060B4BE /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				F22121E41C72B26F0025CCF1 /* GameViewController.swift */,
 				F23516231C72930E0001B7A6 /* ViewController.swift */,
 				F23516211C72930E0001B7A6 /* AppDelegate.swift */,
+				F2A38E391C80CDF30060B4BE /* CoreDataController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				F22121DD1C72B1EA0025CCF1 /* Utils.swift in Sources */,
 				F233675C1C752F2F009A3971 /* DataController.swift in Sources */,
 				F23516221C72930E0001B7A6 /* AppDelegate.swift in Sources */,
+				F2A38E3A1C80CDF30060B4BE /* CoreDataController.swift in Sources */,
 				F2799DB71C7D580E00E9A6E2 /* Shape+CoreDataProperties.swift in Sources */,
 				F22121E61C72B26F0025CCF1 /* GameViewController.swift in Sources */,
 				F233675F1C75397B009A3971 /* MyCoreDataModel.xcdatamodeld in Sources */,
