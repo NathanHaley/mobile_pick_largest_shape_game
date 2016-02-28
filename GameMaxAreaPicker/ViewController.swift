@@ -5,9 +5,8 @@ import UIKit
 import CoreData
 
 
-//TODO: Can these be implemented better?
+//TODO: Can this be implemented better?
 var gameCurrentIndex = 0
-var globalReload = true
 
 class ViewController: UIViewController, UIPageViewControllerDataSource {
     
